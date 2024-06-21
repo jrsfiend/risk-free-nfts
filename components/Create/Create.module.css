@@ -1,0 +1,47 @@
+body {
+    background-color: #121212;
+    color: #00FF00;
+    font-family: 'Press Start 2P', cursive;
+  }
+  
+  button {
+    background-color: #00FF00;
+    color: #121212;
+    border: 2px solid #00FF00;
+    font-family: 'Press Start 2P', cursive;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  button:hover {
+    background-color: #00cc00;
+  }
+  
+  a {
+    color: #00FF00;
+  }
+  
+  a:hover {
+    color: #00cc00;
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      padding: 10px;
+    }
+  
+    .title {
+      font-size: 20px;
+      padding: 10px;
+    }
+  
+    .text {
+      font-size: 14px;
+      margin-top: 10px;
+    }
+  
+    .button {
+      width: 100%;
+      font-size: 14px;
+    }
+  }

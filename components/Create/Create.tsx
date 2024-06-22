@@ -14,7 +14,7 @@ import {
 } from '@mantine/core';
 import {
   AccountLayout,
-  TOKEN_2022_PROGRAM_ID,
+  TOKEN_PROGRAM_ID,
   createAssociatedTokenAccountInstruction,
   getAssociatedTokenAddressSync,
 } from '@solana/spl-token';
@@ -199,7 +199,7 @@ export function Create() {
         new PublicKey('5Tnn8ZgpP4ubaaLTs6qWT14eyd2pqnQxs7ehMBSMmEHL'),
         new PublicKey(umi.payer.publicKey.toString()),
         true,
-        TOKEN_2022_PROGRAM_ID
+        TOKEN_PROGRAM_ID
       );
 
       let ata_account_maybe = await connection.getAccountInfo(ata);
@@ -209,11 +209,11 @@ export function Create() {
           new PublicKey('5Tnn8ZgpP4ubaaLTs6qWT14eyd2pqnQxs7ehMBSMmEHL'),
           new PublicKey(umi.payer.publicKey.toString()),
           true,
-          TOKEN_2022_PROGRAM_ID
+          TOKEN_PROGRAM_ID
         ),
         new PublicKey(umi.payer.publicKey.toString()),
         new PublicKey('5Tnn8ZgpP4ubaaLTs6qWT14eyd2pqnQxs7ehMBSMmEHL'),
-        TOKEN_2022_PROGRAM_ID
+        TOKEN_PROGRAM_ID
       );
 
       let ix = solanaStakePool.StakePoolInstruction.depositSol({
@@ -225,7 +225,7 @@ export function Create() {
           new PublicKey('AJZU5dcBo1Kc7x7Qm2bV4aokSRP99qjoTy6hc6Q5icFk'),
           new PublicKey(umi.payer.publicKey.toString()),
           true,
-          TOKEN_2022_PROGRAM_ID
+          TOKEN_PROGRAM_ID
         ),
         managerFeeAccount: new PublicKey('CFZLzfUaJmzsqSXdDngoesWfxCkzvRDNYztkQrmtCTKB'),
         referralPoolAccount: new PublicKey('CFZLzfUaJmzsqSXdDngoesWfxCkzvRDNYztkQrmtCTKB'),
@@ -248,7 +248,7 @@ export function Create() {
           bytesCreatedOnChain: AccountLayout.span,
         });
       }
-      ix.keys[ix.keys.length - 1].pubkey = TOKEN_2022_PROGRAM_ID;
+      ix.keys[ix.keys.length - 1].pubkey = TOKEN_PROGRAM_ID;
       txBuilder.items.push({
         instruction: {
           ...ix,

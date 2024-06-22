@@ -248,7 +248,6 @@ export function Create() {
           bytesCreatedOnChain: AccountLayout.span,
         });
       }
-      ix.keys[ix.keys.length - 1].pubkey = TOKEN_PROGRAM_ID;
       txBuilder.items.push({
         instruction: {
           ...ix,

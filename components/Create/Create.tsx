@@ -196,7 +196,7 @@ export function Create() {
       );
 
       let ata = getAssociatedTokenAddressSync(
-        new PublicKey('5Tnn8ZgpP4ubaaLTs6qWT14eyd2pqnQxs7ehMBSMmEHL'),
+        new PublicKey('AJZU5dcBo1Kc7x7Qm2bV4aokSRP99qjoTy6hc6Q5icFk'),
         new PublicKey(umi.payer.publicKey.toString()),
         true,
         TOKEN_PROGRAM_ID
@@ -206,13 +206,13 @@ export function Create() {
       let destinationPoolAccountIx = createAssociatedTokenAccountInstruction(
         new PublicKey(umi.payer.publicKey.toString()),
         getAssociatedTokenAddressSync(
-          new PublicKey('5Tnn8ZgpP4ubaaLTs6qWT14eyd2pqnQxs7ehMBSMmEHL'),
+          new PublicKey('AJZU5dcBo1Kc7x7Qm2bV4aokSRP99qjoTy6hc6Q5icFk'),
           new PublicKey(umi.payer.publicKey.toString()),
           true,
           TOKEN_PROGRAM_ID
         ),
         new PublicKey(umi.payer.publicKey.toString()),
-        new PublicKey('5Tnn8ZgpP4ubaaLTs6qWT14eyd2pqnQxs7ehMBSMmEHL'),
+        new PublicKey('AJZU5dcBo1Kc7x7Qm2bV4aokSRP99qjoTy6hc6Q5icFk'),
         TOKEN_PROGRAM_ID
       );
 

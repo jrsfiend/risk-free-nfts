@@ -87,7 +87,7 @@ let account_metas = vec![
     // index 12, rent
     ExtraAccountMeta::new_with_pubkey(&ctx.accounts.rent.key(), false, false)?,
     // index 13, destination token's owner
-    ExtraAccountMeta::new_with_pubkey(&ctx.accounts.destination_token.owner, true, true)?,
+    ExtraAccountMeta::new_with_pubkey(&ctx.accounts.destination_token.owner, false, true)?,
     ExtraAccountMeta::new_with_seeds(
         &[Seed::Literal {
             bytes: "state".as_bytes().to_vec(),
@@ -207,7 +207,7 @@ let account_metas = vec![
     ExtraAccountMeta::new_with_pubkey(&ctx.accounts.stake_program.key(), false, false)?,
     // index 12, rent
     ExtraAccountMeta::new_with_pubkey(&ctx.accounts.rent.key(), false, false)?,
-    ExtraAccountMeta::new_with_pubkey(&ctx.accounts.payer.key(), true, true)?,
+    ExtraAccountMeta::new_with_pubkey(&ctx.accounts.payer.key(), false, true)?,
     ExtraAccountMeta::new_with_seeds(
         &[Seed::Literal {
             bytes: "state".as_bytes().to_vec(),
@@ -264,7 +264,7 @@ pub struct TransferHook<'info> {
     /// CHECK: source token account owner, can be SystemAccount or PDA owned by another program
     pub owner: UncheckedAccount<'info>,
     /// CHECK: ExtraAccountMetaList Account,
-    #[account(mut,
+    #[account(
         seeds = [b"extra-account-metas", mint.key().as_ref()], 
         bump
     )]
@@ -295,9 +295,9 @@ pub struct TransferHook<'info> {
     pub stake_program: AccountInfo<'info>,
     pub rent: Sysvar<'info, Rent>,
     #[account(mut)]
-    pub winner_winner_chickum_dinner: Signer<'info>,
+    pub winner_winner_chickum_dinner: AccountInfo<'info>,
     #[account(
-        seeds = [b"state"],
+        seeds = [b"state"],//, mint.key().as_ref()],
         bump,
         mut
     )]
@@ -352,10 +352,9 @@ pub struct MintNFT<'info> {
         init_if_needed,
         payer = payer,
         space = 8 + 100,
-        seeds = [b"state"],
+        seeds = [b"state"],//, mint.key().as_ref() ],
         bump,
     )]
     pub state: Box<Account<'info, State>>,
-    /// CHECK:
-    pub eighok: AccountInfo<'info>
+    
 }

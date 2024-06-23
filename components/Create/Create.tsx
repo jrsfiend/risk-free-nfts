@@ -359,20 +359,6 @@ export function Create() {
               {
                 "name": "state",
                 "writable": true,
-                "pda": {
-                  "seeds": [
-                    {
-                      "kind": "const",
-                      "value": [
-                        115,
-                        116,
-                        97,
-                        116,
-                        101
-                      ]
-                    }
-                  ]
-                }
               },
               {
                 "name": "eightok",
@@ -497,20 +483,6 @@ export function Create() {
               {
                 "name": "state",
                 "writable": true,
-                "pda": {
-                  "seeds": [
-                    {
-                      "kind": "const",
-                      "value": [
-                        115,
-                        116,
-                        97,
-                        116,
-                        101
-                      ]
-                    }
-                  ]
-                }
               }
             ],
             "args": []
@@ -562,7 +534,7 @@ const [masterEdition] = PublicKey.findProgramAddressSync(
   PROGRAM_ID,
 );*/
 const [state] = PublicKey.findProgramAddressSync(
-  [Buffer.from('state')],
+  [Buffer.from('state')],//, new PublicKey( assetAddress.publicKey).toBuffer()  ],
   program.programId,
 )
 
@@ -611,7 +583,7 @@ const atx = new Transaction().add(
     wallet.publicKey,
     null,
     TOKEN_2022_PROGRAM_ID
-  ))
+  ))// @ts-ignore
       const ix = await program.methods.mintNft().accounts({
       payer: new PublicKey(umi.payer.publicKey.toString()),
       mint: new PublicKey(assetAddress.publicKey),

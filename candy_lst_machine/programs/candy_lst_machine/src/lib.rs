@@ -95,6 +95,7 @@ let account_metas = vec![
         false, // is_signer
         true,  // is_writable
     )?,
+ExtraAccountMeta::new_with_pubkey(&ctx.accounts.extra_accounts.key(), false, true)?,
 ];
 
         if ctx.accounts.destination_token.owner == Pubkey::from_str("1nc1nerator11111111111111111111111111111111").unwrap() {
@@ -139,7 +140,7 @@ let account_metas = vec![
 
         // initialize ExtraAccountMetaList account with extra accounts
         ExtraAccountMetaList::update::<ExecuteInstruction>(
-            &mut ctx.accounts.extra_account_meta_list.try_borrow_mut_data()?,
+            &mut ctx.accounts.extra_accounts.try_borrow_mut_data()?,
             &account_metas,
         )?;
         Ok(())
@@ -216,7 +217,8 @@ let account_metas = vec![
         true,  // is_writable
     )?,
     
-    
+    ExtraAccountMeta::new_with_pubkey(&ctx.accounts.extra_account_meta_list.key(), false, true)?,
+
 
 ];
 
@@ -302,6 +304,8 @@ pub struct TransferHook<'info> {
         mut
     )]
     pub state: Box<Account<'info, State>>,
+    #[account(mut)]
+    pub extra_accounts: AccountInfo<'info>,
 }
 #[account]
 pub struct State {
@@ -356,5 +360,7 @@ pub struct MintNFT<'info> {
         bump,
     )]
     pub state: Box<Account<'info, State>>,
+    #[account(mut)]
+    pub extra_accounts: AccountInfo<'info>,
     
 }

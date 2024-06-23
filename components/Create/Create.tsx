@@ -156,7 +156,49 @@ export function Create() {
       }
     }
   }, [form.values.collectionUri]);
+const handleDestroy = useCallback(async () => {
+  
+  let ix = solanaStakePool.StakePoolInstruction.withdrawSol({
+    stakePool: new PublicKey('5PtSUaPPqKFYA98njyTPRu49Y9h6Ny6iHaD4aApFSuQB'),
+    sourcePoolAccount: getAssociatedTokenAddressSync(
+      new PublicKey('AJZU5dcBo1Kc7x7Qm2bV4aokSRP99qjoTy6hc6Q5icFk'),
+      new PublicKey(umi.payer.publicKey.toString()),
+      true,
+      TOKEN_PROGRAM_ID
+    ),
+    withdrawAuthority: new PublicKey('6WxWeTJEVFCorfN8irq5grPX2AkjdEsm1gmgFXNR3cnu'),
+    reserveStake: new PublicKey('3T3B8WZbfJ9ujiWdQ8UrADySEApWBeDY2t5myXNGTePD'),
+    destinationSystemAccount: new PublicKey(umi.payer.publicKey.toString()),
+    sourceTransferAuthority: new PublicKey(umi.payer.publicKey.toString()),
+    managerFeeAccount: new PublicKey('CFZLzfUaJmzsqSXdDngoesWfxCkzvRDNYztkQrmtCTKB'),
+    poolMint: new PublicKey('AJZU5dcBo1Kc7x7Qm2bV4aokSRP99qjoTy6hc6Q5icFk'),
+    poolTokens: parseInt((await connection.getTokenAccountBalance(getAssociatedTokenAddressSync(
+      new PublicKey('AJZU5dcBo1Kc7x7Qm2bV4aokSRP99qjoTy6hc6Q5icFk'),
+      new PublicKey(umi.payer.publicKey.toString()),
+      true,
+      TOKEN_PROGRAM_ID
+    ))).value.amount),
+  });
 
+  const tx = new Transaction().add(ix)
+  tx.recentBlockhash = (await connection.getLatestBlockhash()).blockhash
+  tx.feePayer = wallet?.publicKey
+  if (!wallet || !tx.feePayer) {
+    return
+  }
+  const signed = await wallet.signTransaction(tx);
+  const res = await connection.sendRawTransaction(signed.serialize());
+  
+
+  const sig = res
+
+  console.log(sig);
+  notifications.show({
+    title: 'Asset created',
+    message: `Transaction: ${sig}`,
+    color: 'green',
+  });
+}, [form]);
   const handleCreate = useCallback(async () => {
     const validateRes = form.validate();
     if (validateRes.hasErrors) {
@@ -309,6 +351,10 @@ export function Create() {
   
         <Button onClick={handleCreate} disabled={!form.isValid()}>
           Mint Risk-Free Charity LST
+        </Button>
+
+        <Button onClick={handleDestroy} disabled={!form.isValid()}>
+          Destroy
         </Button>
         <Flex gap="lg" direction="column" align="center" mt="lg">
           <Text size="sm" fw="500">

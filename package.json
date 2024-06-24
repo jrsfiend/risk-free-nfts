@@ -19,7 +19,7 @@
     "storybook:build": "storybook build"
   },
   "dependencies": {
-    "@coral-xyz/anchor": "0.30.1",
+    "@coral-xyz/anchor": "^0.30.1",
     "@mantine/carousel": "^7.3.2",
     "@mantine/code-highlight": "^7.3.2",
     "@mantine/core": "^7.3.2",

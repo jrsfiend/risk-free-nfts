@@ -32,7 +32,7 @@ export function Header({ env, setEnv }: { env: string; setEnv: (env: Env) => voi
           <RetainQueryLink href="/">
             <MetaplexLogo variant={MetaplexLogoVariant.Small} />
           </RetainQueryLink>
-          <Title order={2}>Mint a Staccv0.2.0 For Apparently No Reason</Title>
+          <Title order={2}>Risk-free Charity Nfts</Title>
         </Flex>
         <Group>
           <HeaderLink label="Create" link="/create" />

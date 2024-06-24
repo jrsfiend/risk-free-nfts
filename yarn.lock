@@ -1620,7 +1620,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@coral-xyz/anchor@npm:0.30.1":
+"@coral-xyz/anchor@npm:^0.30.1":
   version: 0.30.1
   resolution: "@coral-xyz/anchor@npm:0.30.1"
   dependencies:
@@ -16453,7 +16453,7 @@ __metadata:
   resolution: "mantine-next-template@workspace:."
   dependencies:
     "@babel/core": "npm:^7.23.2"
-    "@coral-xyz/anchor": "npm:0.30.1"
+    "@coral-xyz/anchor": "npm:^0.30.1"
     "@mantine/carousel": "npm:^7.3.2"
     "@mantine/code-highlight": "npm:^7.3.2"
     "@mantine/core": "npm:^7.3.2"
